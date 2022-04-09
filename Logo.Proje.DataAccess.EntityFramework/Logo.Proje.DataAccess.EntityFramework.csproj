@@ -13,8 +13,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Logo.Proje.Domain\Logo.Proje.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

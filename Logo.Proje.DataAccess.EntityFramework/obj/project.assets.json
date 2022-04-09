@@ -1519,16 +1519,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
-      },
-      "Logo.Proje.Domain/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/Logo.Proje.Domain.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Logo.Proje.Domain.dll": {}
-        }
       }
     }
   },
@@ -5797,16 +5787,10 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
-    },
-    "Logo.Proje.Domain/1.0.0": {
-      "type": "project",
-      "path": "../Logo.Proje.Domain/Logo.Proje.Domain.csproj",
-      "msbuildProject": "../Logo.Proje.Domain/Logo.Proje.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "Logo.Proje.Domain >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 5.0.15",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.15",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.15"
@@ -5838,11 +5822,7 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {
-            "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.Domain\\Logo.Proje.Domain.csproj": {
-              "projectPath": "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.Domain\\Logo.Proje.Domain.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

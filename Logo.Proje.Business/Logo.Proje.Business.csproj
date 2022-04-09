@@ -4,9 +4,4 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Logo.Proje.DataAccess.EntityFramework.Repository\Logo.Proje.DataAccess.EntityFramework.Repository.csproj" />
-    <ProjectReference Include="..\Logo.Proje.Domain\Logo.Proje.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

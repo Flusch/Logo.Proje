@@ -1486,7 +1486,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "Logo.Proje.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "5.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.15"
         },
@@ -1495,16 +1494,6 @@
         },
         "runtime": {
           "bin/placeholder/Logo.Proje.DataAccess.EntityFramework.dll": {}
-        }
-      },
-      "Logo.Proje.Domain/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/Logo.Proje.Domain.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Logo.Proje.Domain.dll": {}
         }
       }
     }
@@ -5723,11 +5712,6 @@
       "type": "project",
       "path": "../Logo.Proje.DataAccess.EntityFramework/Logo.Proje.DataAccess.EntityFramework.csproj",
       "msbuildProject": "../Logo.Proje.DataAccess.EntityFramework/Logo.Proje.DataAccess.EntityFramework.csproj"
-    },
-    "Logo.Proje.Domain/1.0.0": {
-      "type": "project",
-      "path": "../Logo.Proje.Domain/Logo.Proje.Domain.csproj",
-      "msbuildProject": "../Logo.Proje.Domain/Logo.Proje.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
