@@ -1652,6 +1652,57 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Logo.Proje.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Logo.Proje.DataAccess.EntityFramework.Repository": "1.0.0",
+          "Logo.Proje.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Logo.Proje.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Logo.Proje.Business.dll": {}
+        }
+      },
+      "Logo.Proje.DataAccess.EntityFramework/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.15",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.15"
+        },
+        "compile": {
+          "bin/placeholder/Logo.Proje.DataAccess.EntityFramework.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Logo.Proje.DataAccess.EntityFramework.dll": {}
+        }
+      },
+      "Logo.Proje.DataAccess.EntityFramework.Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Logo.Proje.DataAccess.EntityFramework": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Logo.Proje.DataAccess.EntityFramework.Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Logo.Proje.DataAccess.EntityFramework.Repository.dll": {}
+        }
+      },
+      "Logo.Proje.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Logo.Proje.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Logo.Proje.Domain.dll": {}
+        }
       }
     }
   },
@@ -6129,10 +6180,33 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Logo.Proje.Business/1.0.0": {
+      "type": "project",
+      "path": "../Logo.Proje.Business/Logo.Proje.Business.csproj",
+      "msbuildProject": "../Logo.Proje.Business/Logo.Proje.Business.csproj"
+    },
+    "Logo.Proje.DataAccess.EntityFramework/1.0.0": {
+      "type": "project",
+      "path": "../Logo.Proje.DataAccess.EntityFramework/Logo.Proje.DataAccess.EntityFramework.csproj",
+      "msbuildProject": "../Logo.Proje.DataAccess.EntityFramework/Logo.Proje.DataAccess.EntityFramework.csproj"
+    },
+    "Logo.Proje.DataAccess.EntityFramework.Repository/1.0.0": {
+      "type": "project",
+      "path": "../Logo.Proje.DataAccess.EntityFramework.Repository/Logo.Proje.DataAccess.EntityFramework.Repository.csproj",
+      "msbuildProject": "../Logo.Proje.DataAccess.EntityFramework.Repository/Logo.Proje.DataAccess.EntityFramework.Repository.csproj"
+    },
+    "Logo.Proje.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Logo.Proje.Domain/Logo.Proje.Domain.csproj",
+      "msbuildProject": "../Logo.Proje.Domain/Logo.Proje.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Logo.Proje.Business >= 1.0.0",
+      "Logo.Proje.DataAccess.EntityFramework >= 1.0.0",
+      "Logo.Proje.DataAccess.EntityFramework.Repository >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 5.0.15",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.15",
       "Microsoft.AspNetCore.Identity.UI >= 5.0.15",
@@ -6166,7 +6240,17 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.Business\\Logo.Proje.Business.csproj": {
+              "projectPath": "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.Business\\Logo.Proje.Business.csproj"
+            },
+            "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.DataAccess.EntityFramework.Repository\\Logo.Proje.DataAccess.EntityFramework.Repository.csproj": {
+              "projectPath": "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.DataAccess.EntityFramework.Repository\\Logo.Proje.DataAccess.EntityFramework.Repository.csproj"
+            },
+            "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.DataAccess.EntityFramework\\Logo.Proje.DataAccess.EntityFramework.csproj": {
+              "projectPath": "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.DataAccess.EntityFramework\\Logo.Proje.DataAccess.EntityFramework.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

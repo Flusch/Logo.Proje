@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>aspnet-Logo.Proje-9B6831CF-119A-4633-9D47-365429D1ACD5</UserSecretsId>
+    <UserSecretsId>aspnet-Logo.Proje-D3EE8ABE-6484-4638-BB96-21F3BF2E429D</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +11,16 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Logo.Proje.Business\Logo.Proje.Business.csproj" />
+    <ProjectReference Include="..\Logo.Proje.DataAccess.EntityFramework.Repository\Logo.Proje.DataAccess.EntityFramework.Repository.csproj" />
+    <ProjectReference Include="..\Logo.Proje.DataAccess.EntityFramework\Logo.Proje.DataAccess.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enums\" />
   </ItemGroup>
 
 </Project>
