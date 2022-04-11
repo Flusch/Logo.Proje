@@ -2,7 +2,7 @@
 
 namespace Logo.Proje.Models
 {
-    public class MyIdentityUser : IdentityUser
+    public class CustomIdentityUser : IdentityUser
     {
         public string Name { get; set; }
         public string Surname { get; set; }
