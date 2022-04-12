@@ -1,4 +1,6 @@
-﻿namespace Logo.Proje.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace Logo.Proje.Domain.Entities
 {
     public class Apartment : BaseEntity
     {
@@ -6,7 +8,8 @@
         public int Floor { get; set; }
         public int Number { get; set; }
         public string RoomCount { get; set; }
-        public bool isSomeoneLiving { get; set; }
-        public int residentId { get; set; }
+        public bool IsSomeoneLiving { get; set; }
+        public string ResidentId { get; set; } //Identity User uses guid which is string
+        public List<Bill> Bills { get; set; }
     }
 }

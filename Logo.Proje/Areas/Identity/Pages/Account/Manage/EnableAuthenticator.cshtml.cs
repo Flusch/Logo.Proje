@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Logo.Proje.Models;
+using Logo.Proje.Domain.Entities;
 
 namespace Logo.Proje.Areas.Identity.Pages.Account.Manage
 {

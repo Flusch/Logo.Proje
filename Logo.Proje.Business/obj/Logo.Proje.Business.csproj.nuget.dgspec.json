@@ -146,7 +146,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.Domain\\Logo.Proje.Domain.csproj": {
+                "projectPath": "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.Domain\\Logo.Proje.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -159,6 +163,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.15, )"
@@ -228,6 +236,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

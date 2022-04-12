@@ -2,7 +2,7 @@
 
 namespace Logo.Proje.Domain.Entities
 {
-    public class Bills : BaseEntity
+    public class Bill : BaseEntity
     {
         public string Type { get; set; }
         public int ApartmentId { get; set; }
@@ -11,5 +11,6 @@ namespace Logo.Proje.Domain.Entities
         public DateTime DueDate { get; set; }
         public bool IsPaid { get; set; }
         public DateTime PaymentDate { get; set; }
+        public Apartment Apartment { get; set; }
     }
 }

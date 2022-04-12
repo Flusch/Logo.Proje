@@ -1,4 +1,4 @@
-﻿using Logo.Proje.Models;
+﻿using Logo.Proje.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
