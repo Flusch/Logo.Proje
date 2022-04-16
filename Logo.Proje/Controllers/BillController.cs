@@ -1,98 +1,95 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Logo.Proje.DataAccess.EntityFramework;
 using Logo.Proje.Domain.Entities;
 using Logo.Proje.Business.Abstracts;
-using Logo.Proje.Data;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Logo.Proje.Controllers
 {
-    public class ApartmentController : Controller
+    public class BillController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly ApplicationDbContext _userContext;
-        private readonly IApartmentService _apartmentService;
+        private readonly IBillService _billService;
 
-        public ApartmentController(AppDbContext context, IApartmentService apartmentService, ApplicationDbContext userContext)
+        public BillController(AppDbContext context, IBillService billService)
         {
             _context = context;
-            _apartmentService = apartmentService;
-            _userContext = userContext;
+            _billService = billService;
         }
 
-        // GET: Apartment
+        // GET: Bill
         public IActionResult Index()
         {
-            return View(_apartmentService.GetAllApartments());
+            return View(_billService.GetAllBills());
         }
 
-        // GET: Apartment/Details/5
+        // GET: Bill/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var apartment = _apartmentService.GetApartmentById(x => x.Id == id);
-            if (apartment == null)
+            var bill = _billService.GetBillById(x => x.Id == id);
+            if (bill == null)
             {
                 return NotFound();
             }
-            return View(apartment);
+            return View(bill);
         }
 
-        // GET: Apartment/Create
+        // GET: Bill/Create
         public IActionResult Create()
         {
-            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email");
+            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id");
             return View();
         }
 
-        // POST: Apartment/Create
+        // POST: Bill/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Block,Floor,Number,RoomCount,IsSomeoneLiving,ResidentId,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Apartment apartment)
+        public IActionResult Create([Bind("Type,ApartmentId,Amount,BillDate,DueDate,IsPaid,PaymentDate,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Bill bill)
         {
             if (ModelState.IsValid)
             {
-                _apartmentService.AddApartment(apartment);
+                _billService.AddBill(bill);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email");
-            return View(apartment);
+            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId);
+            return View(bill);
         }
 
-        // GET: Apartment/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Bill/Edit/5
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var apartment = _apartmentService.GetApartmentById(x => x.Id == id);
+            var bill = _billService.GetBillById(x => x.Id == id);
             
-            if (apartment == null)
+            if (bill == null)
             {
                 return NotFound();
             }
-            
-            return View(apartment);
+            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId);
+            return View(bill);
         }
 
-        // POST: Apartment/Edit/5
+        // POST: Bill/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Block,Floor,Number,RoomCount,IsSomeoneLiving,ResidentId,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Apartment apartment)
+        public async Task<IActionResult> Edit(int id, [Bind("Type,ApartmentId,Amount,BillDate,DueDate,IsPaid,PaymentDate,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Bill bill)
         {
-            if (id != apartment.Id)
+            if (id != bill.Id)
             {
                 return NotFound();
             }
@@ -101,11 +98,11 @@ namespace Logo.Proje.Controllers
             {
                 try
                 {
-                    _apartmentService.UpdateApartment(apartment);
+                    _billService.UpdateBill(bill);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ApartmentExists(apartment.Id))
+                    if (!BillExists(bill.Id))
                     {
                         return NotFound();
                     }
@@ -116,38 +113,38 @@ namespace Logo.Proje.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email");
-            return View(apartment);
+            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId);
+            return View(bill);
         }
 
-        // GET: Apartment/Delete/5
-        public IActionResult Delete(int? id)
+        // GET: Bill/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var apartment = _apartmentService.GetApartmentById(x => x.Id == id);
-            if (apartment == null)
+            var bill = _billService.GetBillById(x => x.Id == id);
+            if (bill == null)
             {
                 return NotFound();
             }
 
-            return View(apartment);
+            return View(bill);
         }
 
-        // POST: Apartment/Delete/5
+        // POST: Bill/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            _apartmentService.DeleteApartment(new Apartment { Id = id, LastUpdatedBy = "SYSTEM" });
+            _billService.DeleteBill(new Bill { Id = id, LastUpdatedBy = "SYSTEM" });
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ApartmentExists(int id)
+        private bool BillExists(int id)
         {
-            return _context.Apartments.Any(e => e.Id == id);
+            return _context.Bills.Any(e => e.Id == id);
         }
     }
 }

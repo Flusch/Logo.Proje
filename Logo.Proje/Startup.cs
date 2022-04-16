@@ -40,6 +40,8 @@ namespace Logo.Proje
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IApartmentService, ApartmentService>();
+            services.AddTransient<IBillService, BillService>();
+            services.AddTransient<IMessageService, MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

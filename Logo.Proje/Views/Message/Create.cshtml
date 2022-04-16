@@ -1,4 +1,4 @@
-﻿@model Logo.Proje.Domain.Entities.Apartment
+﻿@model Logo.Proje.Domain.Entities.Message
 
 @{
     ViewData["Title"] = "Create";
@@ -6,42 +6,31 @@
 
 <h1>Create</h1>
 
-<h4>Apartment</h4>
+<h4>Message</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Block" class="control-label"></label>
-                <input asp-for="Block" class="form-control" />
-                <span asp-validation-for="Block" class="text-danger"></span>
+                <label asp-for="From" class="control-label"></label>
+                <input asp-for="From" class="form-control" />
+                <span asp-validation-for="From" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Floor" class="control-label"></label>
-                <input asp-for="Floor" class="form-control" />
-                <span asp-validation-for="Floor" class="text-danger"></span>
+                <label asp-for="To" class="control-label"></label>
+                <input asp-for="To" class="form-control" />
+                <span asp-validation-for="To" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Number" class="control-label"></label>
-                <input asp-for="Number" class="form-control" />
-                <span asp-validation-for="Number" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RoomCount" class="control-label"></label>
-                <input asp-for="RoomCount" class="form-control" />
-                <span asp-validation-for="RoomCount" class="text-danger"></span>
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsSomeoneLiving" /> @Html.DisplayNameFor(model => model.IsSomeoneLiving)
+                    <input class="form-check-input" asp-for="IsRead" /> @Html.DisplayNameFor(model => model.IsRead)
                 </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="ResidentId" class="control-label"></label>
-                <select asp-for="ResidentId" class="form-control" asp-items="ViewBag.ResidentId">
-                    <option disabled selected>--- SELECT ---</option>
-                </select>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -80,7 +69,5 @@
 </div>
 
 @section Scripts {
-    @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
