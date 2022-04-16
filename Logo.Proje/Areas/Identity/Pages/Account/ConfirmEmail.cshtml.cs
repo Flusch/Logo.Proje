@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
-using Logo.Proje.Domain.Entities;
+using Logo.Proje.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

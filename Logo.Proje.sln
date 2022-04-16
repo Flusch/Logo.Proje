@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logo.Proje.DataAccess.Entit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logo.Proje.Domain", "Logo.Proje.Domain\Logo.Proje.Domain.csproj", "{9559C875-8D86-44CC-B334-9D473DCFCB4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logo.Proje", "Logo.Proje\Logo.Proje.csproj", "{26D134DA-123C-4D90-AF85-D9ECAFB28DB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logo.Proje", "Logo.Proje\Logo.Proje.csproj", "{26D134DA-123C-4D90-AF85-D9ECAFB28DB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

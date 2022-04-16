@@ -28,6 +28,9 @@ namespace Logo.Proje.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("CarPlate")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -38,6 +41,12 @@ namespace Logo.Proje.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<bool>("HasCar")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("IdentityNo")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -77,15 +86,6 @@ namespace Logo.Proje.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("carPlate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("hasCar")
-                        .HasColumnType("bit");
-
-                    b.Property<long>("identityNo")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

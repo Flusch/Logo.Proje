@@ -7,6 +7,10 @@ namespace Logo.Proje.DataAccess.EntityFramework
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){ }
 
+        public DbSet<Apartment> Apartments { get; set; }
+        public DbSet<Bill> Bills { get; set; }
+        public DbSet<Message> Messages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

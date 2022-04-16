@@ -1,6 +1,10 @@
+using Logo.Proje.Business.Abstracts;
+using Logo.Proje.Business.Concretes;
 using Logo.Proje.Data;
 using Logo.Proje.DataAccess.EntityFramework;
-using Logo.Proje.Domain.Entities;
+using Logo.Proje.DataAccess.EntityFramework.Repository.Abstracts;
+using Logo.Proje.DataAccess.EntityFramework.Repository.Concretes;
+using Logo.Proje.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -23,14 +27,19 @@ namespace Logo.Proje
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddIdentity<CustomIdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
             services.AddControllersWithViews();
+            services.AddRazorPages();
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IApartmentService, ApartmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

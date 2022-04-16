@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Logo.Proje.Domain.Entities;
+using Logo.Proje.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,10 +13,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using PasswordGenerator;
 
 namespace Logo.Proje.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<CustomIdentityUser> _signInManager;
@@ -46,11 +45,20 @@ namespace Logo.Proje.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            public string Username { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            public string Name { get; set; }
+            public string Surname { get; set; }
+            public string PhoneNumber { get; set; }
+            public long IdentityNumber { get; set; }
+            public bool HasCar { get; set; }
+            public string CarPlate { get; set; }
+            
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -77,6 +85,7 @@ namespace Logo.Proje.Areas.Identity.Pages.Account
             {
                 var user = new CustomIdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                var password = new Password(6).Next();
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

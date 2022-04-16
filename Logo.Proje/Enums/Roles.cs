@@ -1,8 +1,8 @@
-﻿namespace UserIdentityManagement.Web.Enums
+﻿namespace Logo.Proje.Enums
 {
     public enum Roles
     {
-        Developer,
+        Admin,
         Manager,
         Resident
     }
