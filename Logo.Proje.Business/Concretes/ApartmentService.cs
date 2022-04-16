@@ -1,13 +1,10 @@
 ﻿using Logo.Proje.Business.Abstracts;
 using Logo.Proje.DataAccess.EntityFramework.Repository.Abstracts;
-using Logo.Proje.DataAccess.EntityFramework.Repository.Concretes;
 using Logo.Proje.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logo.Proje.Business.Concretes
 {
@@ -23,7 +20,7 @@ namespace Logo.Proje.Business.Concretes
         }
         public Apartment GetApartmentById(Expression<Func<Apartment, bool>> filter)
         {
-            throw new NotImplementedException();
+            return _repository.GetById(filter);
         }
         public List<Apartment> GetAllApartments()
         {
@@ -31,15 +28,30 @@ namespace Logo.Proje.Business.Concretes
         }
         public void AddApartment(Apartment apartment)
         {
-            throw new NotImplementedException();
+            _repository.Add(apartment);
+            _unitOfWork.Commit();
         }
-        public void UpdateApartmentById(Apartment apartment)
+        public void UpdateApartment(Apartment apartment) //fix
         {
-            throw new NotImplementedException();
+            var exist = _repository.GetById(x => x.Id == apartment.Id);
+            if (exist != null)
+            {
+                exist.Block = apartment.Block;
+                exist.Floor = apartment.Floor;
+                exist.Number = apartment.Number;
+                exist.RoomCount = apartment.RoomCount;
+                exist.IsSomeoneLiving = apartment.IsSomeoneLiving;
+                exist.ResidentId = apartment.ResidentId;
+                exist.LastUpdatedBy = "Yavuz Selim"; //fix
+                exist.LastUpdatedAt = DateTime.Now;
+                _repository.Update(exist);
+                _unitOfWork.Commit();
+            }
         }
-        public void DeleteApartmentById(Apartment apartment)
+        public void DeleteApartment (Apartment apartment)
         {
-            throw new NotImplementedException();
+            _repository.Delete(apartment);
+            _unitOfWork.Commit();
         }
     }
 }

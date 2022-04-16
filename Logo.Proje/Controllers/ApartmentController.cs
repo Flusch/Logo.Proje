@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Logo.Proje.DataAccess.EntityFramework;
 using Logo.Proje.Domain.Entities;
@@ -23,22 +20,19 @@ namespace Logo.Proje.Controllers
         }
 
         // GET: Apartment
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            //return View(await _context.Apartments.ToListAsync());
             return View(_apartmentService.GetAllApartments());
         }
 
         // GET: Apartment/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var apartment = await _context.Apartments
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var apartment = _apartmentService.GetApartmentById(x => x.Id == id);
             if (apartment == null)
             {
                 return NotFound();
@@ -58,12 +52,11 @@ namespace Logo.Proje.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Block,Floor,Number,RoomCount,IsSomeoneLiving,ResidentId,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Apartment apartment)
+        public IActionResult Create([Bind("Block,Floor,Number,RoomCount,IsSomeoneLiving,ResidentId,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Apartment apartment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(apartment);
-                await _context.SaveChangesAsync();
+                _apartmentService.AddApartment(apartment);
                 return RedirectToAction(nameof(Index));
             }
             return View(apartment);
@@ -77,7 +70,7 @@ namespace Logo.Proje.Controllers
                 return NotFound();
             }
 
-            var apartment = await _context.Apartments.FindAsync(id);
+            var apartment = _apartmentService.GetApartmentById(x => x.Id == id);
             if (apartment == null)
             {
                 return NotFound();
@@ -90,7 +83,7 @@ namespace Logo.Proje.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Block,Floor,Number,RoomCount,IsSomeoneLiving,ResidentId,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Apartment apartment)
+        public IActionResult Edit(int id, [Bind("Block,Floor,Number,RoomCount,IsSomeoneLiving,ResidentId,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Apartment apartment)
         {
             if (id != apartment.Id)
             {
@@ -101,8 +94,7 @@ namespace Logo.Proje.Controllers
             {
                 try
                 {
-                    _context.Update(apartment);
-                    await _context.SaveChangesAsync();
+                    _apartmentService.UpdateApartment(apartment);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,15 +113,13 @@ namespace Logo.Proje.Controllers
         }
 
         // GET: Apartment/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var apartment = await _context.Apartments
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var apartment = _apartmentService.GetApartmentById(x => x.Id == id);
             if (apartment == null)
             {
                 return NotFound();
@@ -141,11 +131,12 @@ namespace Logo.Proje.Controllers
         // POST: Apartment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var apartment = await _context.Apartments.FindAsync(id);
+            _apartmentService.DeleteApartment(new Apartment { Id = id, LastUpdatedBy = "Yavuz Selim" });
+            /*var apartment = await _context.Apartments.FindAsync(id);
             _context.Apartments.Remove(apartment);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();*/
             return RedirectToAction(nameof(Index));
         }
 

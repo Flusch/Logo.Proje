@@ -28,14 +28,13 @@ namespace Logo.Proje.DataAccess.EntityFramework.Repository.Concretes
         }
         public void Update(T entity)
         {
-            var exist = GetById(x => x.Id == entity.Id);
+            /*T exist = GetById(x => x.Id == apartment.Id);
             if (exist != null)
             {
-
-                exist.LastUpdatedBy = entity.LastUpdatedBy;
+                exist.LastUpdatedBy = apartment.LastUpdatedBy;
                 exist.LastUpdatedAt = DateTime.Now;
-                unitOfWork.Context.Entry(exist).State = EntityState.Modified;
-            }
+            }*/
+            unitOfWork.Context.Entry(entity).State = EntityState.Modified;
         }
         public void Delete(T entity)
         {
