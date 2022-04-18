@@ -333,6 +333,10 @@
               "target": "Package",
               "version": "[5.0.2, )"
             },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.15.0, )"
+            },
             "PasswordGenerator": {
               "target": "Package",
               "version": "[2.1.0, )"

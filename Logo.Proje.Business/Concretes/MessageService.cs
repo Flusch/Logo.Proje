@@ -33,7 +33,7 @@ namespace Logo.Proje.Business.Concretes
             _repository.Add(message);
             _unitOfWork.Commit();
         }
-        public void UpdateMessage(Message message) //fix
+        public void UpdateMessage(Message message) //fix: try to move this in repository
         {
             var exist = _repository.GetById(x => x.Id == message.Id);
             if (exist != null)
@@ -42,7 +42,7 @@ namespace Logo.Proje.Business.Concretes
                 exist.To = message.To;
                 exist.Text = message.Text;
                 exist.IsRead = message.IsRead;
-                exist.LastUpdatedBy = "SYSTEM"; //fix
+                exist.LastUpdatedBy = "SYSTEM"; //fix: get current user
                 exist.LastUpdatedAt = DateTime.Now;
                 _repository.Update(exist);
                 _unitOfWork.Commit();

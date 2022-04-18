@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Driver;
 
 namespace Logo.Proje
 {
@@ -36,6 +37,11 @@ namespace Logo.Proje
                 .AddDefaultTokenProviders();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddSingleton<IMongoClient, MongoClient>(x =>
+            {
+                return new MongoClient(Configuration.GetConnectionString("MongoDbConnection"));
+            });
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));

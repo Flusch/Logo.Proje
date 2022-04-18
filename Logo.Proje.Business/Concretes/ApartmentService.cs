@@ -31,7 +31,7 @@ namespace Logo.Proje.Business.Concretes
             _repository.Add(apartment);
             _unitOfWork.Commit();
         }
-        public void UpdateApartment(Apartment apartment) //fix
+        public void UpdateApartment(Apartment apartment) //fix: try to move this in repository
         {
             var exist = _repository.GetById(x => x.Id == apartment.Id);
             if (exist != null)
@@ -42,7 +42,7 @@ namespace Logo.Proje.Business.Concretes
                 exist.RoomCount = apartment.RoomCount;
                 exist.IsSomeoneLiving = apartment.IsSomeoneLiving;
                 exist.ResidentId = apartment.ResidentId;
-                exist.LastUpdatedBy = "Yavuz Selim"; //fix
+                exist.LastUpdatedBy = "SYSTEM"; //fix: get current user
                 exist.LastUpdatedAt = DateTime.Now;
                 _repository.Update(exist);
                 _unitOfWork.Commit();

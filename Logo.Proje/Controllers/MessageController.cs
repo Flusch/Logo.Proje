@@ -8,17 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using Logo.Proje.DataAccess.EntityFramework;
 using Logo.Proje.Domain.Entities;
 using Logo.Proje.Business.Abstracts;
+using Logo.Proje.Data;
 
 namespace Logo.Proje.Controllers
 {
     public class MessageController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ApplicationDbContext _userContext;
         private readonly IMessageService _messageService;
 
-        public MessageController(AppDbContext context, IMessageService messageService = null)
+        public MessageController(AppDbContext context, ApplicationDbContext userContext, IMessageService messageService)
         {
             _context = context;
+            _userContext = userContext;
             _messageService = messageService;
         }
 
@@ -29,15 +32,14 @@ namespace Logo.Proje.Controllers
         }
 
         // GET: Message/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var message = await _context.Messages
-                .FirstOrDefaultAsync(m => m.Id == id);
+            
+            var message = _messageService.GetMessageById(x => x.Id == id);
             if (message == null)
             {
                 return NotFound();
@@ -49,6 +51,7 @@ namespace Logo.Proje.Controllers
         // GET: Message/Create
         public IActionResult Create()
         {
+            ViewData["To"] = new SelectList(_userContext.Users, "Id", "Email"); //fix: find a way to show the 'fullName(email)' instead of email
             return View();
         }
 
@@ -57,30 +60,30 @@ namespace Logo.Proje.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("From,To,Text,IsRead,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Message message)
+        public IActionResult Create([Bind("From,To,Text,IsRead,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Message message)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(message);
-                await _context.SaveChangesAsync();
+                _messageService.AddMessage(message);
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["To"] = new SelectList(_userContext.Users, "Id", "Email"); //fix: find a way to show the 'residentName(email)' instead of email
             return View(message);
         }
 
         // GET: Message/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var message = await _context.Messages.FindAsync(id);
+            var message = _messageService.GetMessageById(x => x.Id == id);
             if (message == null)
             {
                 return NotFound();
             }
+            ViewData["To"] = new SelectList(_userContext.Users, "Id", "Email", message.To); //fix: find a way to show the 'residentName(email)' instead of email
             return View(message);
         }
 
@@ -89,7 +92,7 @@ namespace Logo.Proje.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("From,To,Text,IsRead,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Message message)
+        public IActionResult Edit(int id, [Bind("From,To,Text,IsRead,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Message message)
         {
             if (id != message.Id)
             {
@@ -100,8 +103,7 @@ namespace Logo.Proje.Controllers
             {
                 try
                 {
-                    _context.Update(message);
-                    await _context.SaveChangesAsync();
+                    _messageService.UpdateMessage(message);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,19 +118,18 @@ namespace Logo.Proje.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["To"] = new SelectList(_userContext.Users, "Id", "Email", message.To); //fix: find a way to show the 'residentName(email)' instead of email
             return View(message);
         }
 
         // GET: Message/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var message = await _context.Messages
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var message = _messageService.GetMessageById(x => x.Id == id);
             if (message == null)
             {
                 return NotFound();
@@ -140,11 +141,9 @@ namespace Logo.Proje.Controllers
         // POST: Message/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var message = await _context.Messages.FindAsync(id);
-            _context.Messages.Remove(message);
-            await _context.SaveChangesAsync();
+            _messageService.DeleteMessage(new Message { Id = id, LastUpdatedBy = "SYSTEM" });
             return RedirectToAction(nameof(Index));
         }
 

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +32,7 @@ namespace Logo.Proje.Controllers
             {
                 return NotFound();
             }
+            
             var bill = _billService.GetBillById(x => x.Id == id);
             if (bill == null)
             {
@@ -44,7 +44,7 @@ namespace Logo.Proje.Controllers
         // GET: Bill/Create
         public IActionResult Create()
         {
-            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id");
+            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id"); //fix: find a way to show the 'residentName(email)' instead of id
             return View();
         }
 
@@ -60,7 +60,7 @@ namespace Logo.Proje.Controllers
                 _billService.AddBill(bill);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId);
+            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id"); //fix: find a way to show the 'residentName(email)' instead of id
             return View(bill);
         }
 
@@ -71,14 +71,12 @@ namespace Logo.Proje.Controllers
             {
                 return NotFound();
             }
-
             var bill = _billService.GetBillById(x => x.Id == id);
-            
             if (bill == null)
             {
                 return NotFound();
             }
-            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId);
+            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId); //fix: find a way to show the 'residentName(email)' instead of id
             return View(bill);
         }
 
@@ -87,7 +85,7 @@ namespace Logo.Proje.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Type,ApartmentId,Amount,BillDate,DueDate,IsPaid,PaymentDate,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Bill bill)
+        public IActionResult Edit(int id, [Bind("Type,ApartmentId,Amount,BillDate,DueDate,IsPaid,PaymentDate,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Bill bill)
         {
             if (id != bill.Id)
             {
@@ -113,12 +111,12 @@ namespace Logo.Proje.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId);
+            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId); //fix: find a way to show the 'residentName(email)' instead of id
             return View(bill);
         }
 
         // GET: Bill/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {

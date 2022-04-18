@@ -31,7 +31,7 @@ namespace Logo.Proje.Business.Concretes
             _repository.Add(bill);
             _unitOfWork.Commit();
         }
-        public void UpdateBill(Bill bill) //fix
+        public void UpdateBill(Bill bill) //fix: try to move this in repository
         {
             var exist = _repository.GetById(x => x.Id == bill.Id);
             if (exist != null)
@@ -44,7 +44,7 @@ namespace Logo.Proje.Business.Concretes
                 exist.IsPaid = bill.IsPaid;
                 exist.PaymentDate = bill.PaymentDate;
                 //exist.Apartment = bill.Apartment;
-                exist.LastUpdatedBy = "Yavuz Selim"; //fix
+                exist.LastUpdatedBy = "SYSTEM"; //fix: get current user
                 exist.LastUpdatedAt = DateTime.Now;
                 _repository.Update(exist);
                 _unitOfWork.Commit();
