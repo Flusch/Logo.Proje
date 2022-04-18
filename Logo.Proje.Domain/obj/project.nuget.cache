@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "G42hA3nM6Hk3qEIJNENtMiqXToSnyj3XGjMjeJLk4iSdZYVLEAhfscorrw6Q1/ez6mkkOg3QLwQ44DOlz3ReAA==",
+  "dgSpecHash": "jvrIdhxLcUJkNYnId39p4lRNXM1Fpps/NHXSFtGz+B9xnWABy+a+aH4QxNhVl7mgF9H5qxojB/guDmoZqrM50A==",
   "success": true,
   "projectFilePath": "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.Domain\\Logo.Proje.Domain.csproj",
   "expectedPackageFiles": [
@@ -17,7 +17,9 @@
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
-    "C:\\Users\\Yavuz Selim\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+    "C:\\Users\\Yavuz Selim\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\Yavuz Selim\\.nuget\\packages\\mongodb.bson\\2.15.0\\mongodb.bson.2.15.0.nupkg.sha512",
+    "C:\\Users\\Yavuz Selim\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

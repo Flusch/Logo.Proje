@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0yLrMGyhi4N8ZfqVo4EOWBUU91S5lL7clBcnQqB1OyoAksm7sY/dm7LUsKjr1Rui3kPrR2np7aZ5vVlmIPENEQ==",
+  "dgSpecHash": "Wna24Y1vE1hCGBYvuEzoqUWdF8q0cd+4Uh4j78EgtOg2K0XrMNgnHQdabgXV7O6NufGfhjjKLqTgWeCq83+U5Q==",
   "success": true,
   "projectFilePath": "D:\\Projects\\GitHub\\Logo.Proje\\Logo.Proje.DataAccess.EntityFramework.Repository\\Logo.Proje.DataAccess.EntityFramework.Repository.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Yavuz Selim\\.nuget\\packages\\mongodb.bson\\2.15.0\\mongodb.bson.2.15.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
@@ -80,6 +81,7 @@
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
+    "C:\\Users\\Yavuz Selim\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
     "C:\\Users\\Yavuz Selim\\.nuget\\packages\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",

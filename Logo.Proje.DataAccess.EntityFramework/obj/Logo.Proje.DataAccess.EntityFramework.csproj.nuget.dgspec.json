@@ -121,6 +121,10 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[5.0.15, )"
+            },
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.15.0, )"
             }
           },
           "imports": [
