@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Logo.Proje.DataAccess.EntityFramework;
@@ -16,7 +15,7 @@ namespace Logo.Proje.Controllers
         private readonly ApplicationDbContext _userContext;
         private readonly IApartmentService _apartmentService;
 
-        public ApartmentController(AppDbContext context, IApartmentService apartmentService, ApplicationDbContext userContext)
+        public ApartmentController(AppDbContext context, ApplicationDbContext userContext, IApartmentService apartmentService)
         {
             _context = context;
             _apartmentService = apartmentService;
@@ -36,6 +35,7 @@ namespace Logo.Proje.Controllers
             {
                 return NotFound();
             }
+            
             var apartment = _apartmentService.GetApartmentById(x => x.Id == id);
             if (apartment == null)
             {
@@ -47,7 +47,7 @@ namespace Logo.Proje.Controllers
         // GET: Apartment/Create
         public IActionResult Create()
         {
-            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email");
+            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email"); //fix: find a way to show the 'fullname(email)' instead of just email
             return View();
         }
 
@@ -63,25 +63,23 @@ namespace Logo.Proje.Controllers
                 _apartmentService.AddApartment(apartment);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email");
+            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email"); //fix: find a way to show the 'fullname(email)' instead of just email
             return View(apartment);
         }
 
         // GET: Apartment/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
             var apartment = _apartmentService.GetApartmentById(x => x.Id == id);
-            
             if (apartment == null)
             {
                 return NotFound();
             }
-            
+            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email", apartment.ResidentId); //fix: find a way to show the 'fullname(email)' instead of just email
             return View(apartment);
         }
 
@@ -116,7 +114,7 @@ namespace Logo.Proje.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email");
+            ViewData["ResidentId"] = new SelectList(_userContext.Users, "Id", "Email", apartment.ResidentId); //fix: find a way to show the 'fullname(email)' instead of just email
             return View(apartment);
         }
 

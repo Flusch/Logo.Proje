@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Logo.Proje.DataAccess.EntityFramework.Repository\Logo.Proje.DataAccess.EntityFramework.Repository.csproj" />
     <ProjectReference Include="..\Logo.Proje.Domain\Logo.Proje.Domain.csproj" />
   </ItemGroup>

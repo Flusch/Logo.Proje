@@ -2299,7 +2299,8 @@
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "Logo.Proje.DataAccess.EntityFramework.Repository": "1.0.0",
-          "Logo.Proje.Domain": "1.0.0"
+          "Logo.Proje.Domain": "1.0.0",
+          "MongoDB.Driver": "2.15.0"
         },
         "compile": {
           "bin/placeholder/Logo.Proje.Business.dll": {}

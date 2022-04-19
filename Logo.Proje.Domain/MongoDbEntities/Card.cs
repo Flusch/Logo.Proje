@@ -7,6 +7,6 @@
         public string OwnerFullName { get; set; }
         public string CardNumber { get; set; }
         public string ExpirationDate { get; set; }
-        public string CVV { get; set; }
+        public int CVV { get; set; }
     }
 }
