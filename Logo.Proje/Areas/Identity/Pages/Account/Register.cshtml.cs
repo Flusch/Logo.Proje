@@ -85,9 +85,10 @@ namespace Logo.Proje.Areas.Identity.Pages.Account
             {
                 var user = new CustomIdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                var password = new Password(6).Next();
+                await _userManager.AddToRoleAsync(user, Enums.Roles.Resident.ToString());
+                var password = new Password(6).Next(); //fix: generate random password
                 if (result.Succeeded)
-                {
+                {                    
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

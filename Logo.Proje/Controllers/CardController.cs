@@ -17,17 +17,19 @@ namespace Logo.Proje.Controllers
         private readonly ICardService _cardService;
         private readonly IMongoCollection<Card> _cards;
         private readonly UserManager<CustomIdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public CardController(ICardService cardService,
             ApplicationDbContext usercontext,
             IMongoClient mongoClient,
-            UserManager<CustomIdentityUser> userManager)
+            UserManager<CustomIdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _userContext = usercontext;
             _cardService = cardService;
             _cards = mongoClient.GetDatabase("LogoDb").GetCollection<Card>("cards");
             _userManager = userManager;
-
+            _roleManager = roleManager;
         }
 
         // GET: Card
@@ -53,28 +55,24 @@ namespace Logo.Proje.Controllers
         }
 
         // GET: Card/Create
-        public async Task<IActionResult> CreateAsync()
+        public IActionResult CreateAsync()
         {
-            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
-            var id = _userManager.GetUserId(User);
-            var user = await _userManager.GetUserAsync(User);
-            var email = user.Email;
-
-            ViewData["OwnerId"] = new SelectList(_userContext.Users, "Id", "Email"); //fix: find a way to show the 'fullname(email)' instead of just email
             return View();
         }
 
         // POST: Card/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("CardName,OwnerId,OwnerFullName,CardNumber,ExpirationDate,CVV,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Card card)
+        public async Task<IActionResult> CreateAsync([Bind("CardName,OwnerId,OwnerFullName,CardNumber,ExpirationDate,CVV,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Card card)
         {
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+            var user = await _userManager.GetUserAsync(User);
+            card.OwnerId = user.Id;
             if (ModelState.IsValid)
             {
                 _cardService.AddCard(card);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OwnerId"] = new SelectList(_userContext.Users, "Id", "Email"); //fix: find a way to show the 'fullname(email)' instead of just email
             return View(card);
         }
 
@@ -90,7 +88,6 @@ namespace Logo.Proje.Controllers
             {
                 return NotFound();
             }
-            ViewData["OwnerId"] = new SelectList(_userContext.Users, "Id", "Email"); //fix: find a way to show the 'fullname(email)' instead of just email
             return View(card);
         }
 
@@ -123,7 +120,6 @@ namespace Logo.Proje.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OwnerId"] = new SelectList(_userContext.Users, "Id", "Email"); //fix: find a way to show the 'fullname(email)' instead of just email
             return View(card);
         }
 

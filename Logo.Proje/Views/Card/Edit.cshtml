@@ -6,7 +6,7 @@
 
 <h1>Edit</h1>
 
-<h4>Apartment</h4>
+<h4>Card</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,11 +16,6 @@
                 <label asp-for="CardName" class="control-label"></label>
                 <input asp-for="CardName" class="form-control" />
                 <span asp-validation-for="CardName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OwnerId" class="control-label"></label>
-                <input asp-for="OwnerId" class="form-control" />
-                <span asp-validation-for="OwnerId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OwnerFullName" class="control-label"></label>
@@ -43,11 +38,7 @@
                 <span asp-validation-for="CVV" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
-            </div>
+            <input type="hidden" asp-for="OwnerId" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

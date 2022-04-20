@@ -57,7 +57,7 @@ namespace Logo.Proje.Areas.Identity.Pages.Account
         {
             try
             {
-                MailAddress mail = new MailAddress(emailAdress);
+                MailAddress mail = new(emailAdress);
                 return true;
             }
             catch (FormatException)
