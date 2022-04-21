@@ -113,7 +113,7 @@ namespace Logo.Proje.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId); //fix: find a way to show the 'residentName(email)' instead of id
+            //ViewData["ApartmentId"] = new SelectList(_context.Apartments, "Id", "Id", bill.ApartmentId); //fix: find a way to show the 'residentName(email)' instead of id
             return View(bill);
         }
 
@@ -129,7 +129,6 @@ namespace Logo.Proje.Controllers
             {
                 return NotFound();
             }
-
             return View(bill);
         }
 

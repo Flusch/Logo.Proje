@@ -108,7 +108,7 @@ namespace Logo.Proje.Controllers
         // POST: Apartment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmedAsync(string id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             await _userManager.DeleteAsync(await _userManager.FindByIdAsync(id));
             return RedirectToAction(nameof(Index));

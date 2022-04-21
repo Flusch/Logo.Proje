@@ -65,7 +65,7 @@ namespace Logo.Proje.Controllers
         // POST: Card/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync([Bind("CardName,OwnerId,OwnerFullName,CardNumber,ExpirationDate,CVV,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Card card)
+        public async Task<IActionResult> Create([Bind("CardName,OwnerId,OwnerFullName,CardNumber,ExpirationDate,CVV,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Card card)
         {
             System.Security.Claims.ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);

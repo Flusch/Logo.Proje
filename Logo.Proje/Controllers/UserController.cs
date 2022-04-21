@@ -32,22 +32,30 @@ namespace Logo.Proje.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> MyBillsAsync()
+        public async Task<IActionResult> MyBills()
         {
             System.Security.Claims.ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
             return View(_billService.GetMyBills(user.Id));
         }
-        public async Task<IActionResult> PayBillAsync()
+        // GET: PayBill/5
+        public IActionResult PayBill(int? id)
         {
-            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
-            var user = await _userManager.GetUserAsync(User);
-            ViewData["MyBills"] = new SelectList(_billService.GetMyBills(user.Id), "Id", "Amount"); //fix: find a way to show the 'residentName(email)' instead of id
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var bill = _billService.GetBillById(x => x.Id == id);
+            if (bill == null)
+            {
+                return NotFound();
+            }
+            return View(bill);
         }
+        // POST: PayBill/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PayBillAsync([Bind("Type,ApartmentId,Amount,BillDate,DueDate,IsPaid,PaymentDate,Id,IsDeleted,CreatedAt,CreatedBy,LastUpdatedAt,LastUpdatedBy")] Payment payment)
+        public async Task<IActionResult> PayBill([Bind("Type,ApartmentId,Amount,BillDate,DueDate,IsPaid,PaymentDate,Id")] Payment payment)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +69,7 @@ namespace Logo.Proje.Controllers
             */
             return View(payment);
         }
-        public async Task<IActionResult> MyMessagesAsync()
+        public async Task<IActionResult> MyMessages()
         {
             System.Security.Claims.ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);

@@ -55,7 +55,7 @@ namespace Logo.Proje.Controllers
         }
 
         // GET: Card/Create
-        public async Task<IActionResult> CreateAsync()
+        public async Task<IActionResult> Create()
         {
             System.Security.Claims.ClaimsPrincipal currentUser = this.User;
             var id = _userManager.GetUserId(User);
