@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Logo.Proje.Domain.Entities.Bill>
+
+@{
+    ViewData["Title"] = "My Bills";
+}
+
+<h1>My Bills</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPaid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentDate)
+            </td>
+            <td>
+                <a asp-action="PayBill" asp-route-id="@item.Id">Pay</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

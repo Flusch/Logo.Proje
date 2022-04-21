@@ -2,6 +2,7 @@
 using Logo.Proje.Data;
 using Logo.Proje.Domain.MongoDbEntities;
 using Logo.Proje.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Logo.Proje.Controllers
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class PaymentController : Controller
     {
         private readonly ApplicationDbContext _userContext;

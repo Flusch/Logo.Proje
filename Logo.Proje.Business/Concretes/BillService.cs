@@ -55,5 +55,10 @@ namespace Logo.Proje.Business.Concretes
             _repository.Delete(bill);
             _unitOfWork.Commit();
         }
+        public List<Bill> GetMyBills(string id)
+        {
+            var apartmentId = _unitOfWork.Context.Set<Apartment>().Where(x => x.ResidentId == id).Select(x => x.Id).FirstOrDefault();
+            return _unitOfWork.Context.Set<Bill>().Where(x => x.ApartmentId == apartmentId).ToList();
+        }
     }
 }

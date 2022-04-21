@@ -13,5 +13,6 @@ namespace Logo.Proje.Business.Abstracts
         void AddMessage(Message message);
         void UpdateMessage(Message message);
         void DeleteMessage (Message message);
+        List<Message> GetMyMessages(string id);
     }
 }

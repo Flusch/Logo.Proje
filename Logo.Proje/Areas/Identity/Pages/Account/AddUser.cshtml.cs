@@ -17,17 +17,17 @@ using PasswordGenerator;
 
 namespace Logo.Proje.Areas.Identity.Pages.Account
 {
-    public class RegisterModel : PageModel
+    public class AddUserModel : PageModel
     {
         private readonly SignInManager<CustomIdentityUser> _signInManager;
         private readonly UserManager<CustomIdentityUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<AddUserModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterModel(
+        public AddUserModel(
             UserManager<CustomIdentityUser> userManager,
             SignInManager<CustomIdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<AddUserModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -58,7 +58,7 @@ namespace Logo.Proje.Areas.Identity.Pages.Account
             public long IdentityNumber { get; set; }
             public bool HasCar { get; set; }
             public string CarPlate { get; set; }
-            
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -80,37 +80,16 @@ namespace Logo.Proje.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new CustomIdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new CustomIdentityUser { UserName = Input.Username, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 await _userManager.AddToRoleAsync(user, Enums.Roles.Resident.ToString());
-                var password = new Password(6).Next(); //fix: generate random password
+                //var password = new Password(6).Next(); //fix: generate random password
                 if (result.Succeeded)
-                {                    
+                {
                     _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    return LocalRedirect("/Resident");
                 }
                 foreach (var error in result.Errors)
                 {

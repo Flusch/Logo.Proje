@@ -1,18 +1,16 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Logo.Proje.DataAccess.EntityFramework;
-using Logo.Proje.Domain.Entities;
-using Logo.Proje.Business.Abstracts;
 using Logo.Proje.Data;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using Logo.Proje.Models;
+using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 
 namespace Logo.Proje.Controllers
 {
     //fix: create a resident service and move the logic to it
+    [Authorize(Roles = "Admin, Manager")]
     public class ResidentController : Controller
     {
         private readonly AppDbContext _context;
@@ -29,7 +27,7 @@ namespace Logo.Proje.Controllers
         // GET: Resident
         public IActionResult Index()
         {
-            return View(_userManager.Users.ToList());
+            return View(_userManager.GetUsersInRoleAsync(Enums.Roles.Resident.ToString()).Result.ToList());
         }
 
         // GET: Apartment/Details/5
@@ -110,9 +108,9 @@ namespace Logo.Proje.Controllers
         // POST: Apartment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmedAsync(string id)
         {
-            _userContext.Remove(new CustomIdentityUser { Id = id });
+            await _userManager.DeleteAsync(await _userManager.FindByIdAsync(id));
             return RedirectToAction(nameof(Index));
         }
 

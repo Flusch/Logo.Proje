@@ -1,12 +1,10 @@
 ﻿using Logo.Proje.Business.Abstracts;
 using Logo.Proje.DataAccess.EntityFramework.Repository.Abstracts;
 using Logo.Proje.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Logo.Proje.Business.Concretes
 {
@@ -17,8 +15,8 @@ namespace Logo.Proje.Business.Concretes
 
         public MessageService(IRepository<Message> repository, IUnitOfWork unitOfWork)
         {
-            this._repository = repository;
-            this._unitOfWork = unitOfWork;
+            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
         public Message GetMessageById(Expression<Func<Message, bool>> filter)
         {
@@ -52,6 +50,11 @@ namespace Logo.Proje.Business.Concretes
         {
             _repository.Delete(message);
             _unitOfWork.Commit();
+        }
+
+        public List<Message> GetMyMessages(string id)
+        {            
+            return _unitOfWork.Context.Set<Message>().Where(x => x.To == id).ToList();
         }
     }
 }

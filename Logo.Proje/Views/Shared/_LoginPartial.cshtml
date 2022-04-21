@@ -5,6 +5,27 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        @if (User.IsInRole("Resident"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="@Url.Action("MyBills", "User")">Bills</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="@Url.Action("MyMessages", "User")">Messages</a>
+            </li>
+        }
+        if (User.IsInRole("Admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="@Url.Action("Index", "Admin")">Admin Tools</a>
+            </li>
+        }
+        if (User.IsInRole("Manager"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="@Url.Action("Index", "Manager")">Manager Tools</a>
+            </li>
+        }
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
         </li>

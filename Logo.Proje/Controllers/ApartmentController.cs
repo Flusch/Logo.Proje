@@ -6,9 +6,11 @@ using Logo.Proje.Domain.Entities;
 using Logo.Proje.Business.Abstracts;
 using Logo.Proje.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Logo.Proje.Controllers
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class ApartmentController : Controller
     {
         private readonly AppDbContext _context;

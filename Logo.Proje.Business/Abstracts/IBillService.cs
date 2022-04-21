@@ -12,5 +12,6 @@ namespace Logo.Proje.Business.Abstracts
         void AddBill(Bill bill);
         void UpdateBill(Bill bill);
         void DeleteBill(Bill bill);
+        List<Bill> GetMyBills(string id);
     }
 }

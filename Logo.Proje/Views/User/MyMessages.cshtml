@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Logo.Proje.Models;
+@model IEnumerable<Logo.Proje.Domain.Entities.Message>
+
+@{
+    ViewData["Title"] = "My Messages";
+}
+
+<h1>My Messages</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    <a asp-action="Read" asp-route-id="@item.Id">Read</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

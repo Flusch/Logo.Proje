@@ -9,9 +9,11 @@ using Logo.Proje.DataAccess.EntityFramework;
 using Logo.Proje.Domain.Entities;
 using Logo.Proje.Business.Abstracts;
 using Logo.Proje.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Logo.Proje.Controllers
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class MessageController : Controller
     {
         private readonly AppDbContext _context;
