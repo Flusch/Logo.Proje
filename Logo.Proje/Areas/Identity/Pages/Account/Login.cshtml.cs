@@ -43,13 +43,15 @@ namespace Logo.Proje.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Email / Kullanıcı Adı")]
             public string Email { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Şifre")]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Beni Hatırla")]
             public bool RememberMe { get; set; }
         }
 

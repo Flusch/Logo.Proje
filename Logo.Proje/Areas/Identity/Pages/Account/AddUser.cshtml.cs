@@ -45,29 +45,41 @@ namespace Logo.Proje.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required(ErrorMessage = "{0} alanı gereklidir.")]
+            [Display(Name = "Kullanıcı Adı")]
             public string Username { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} alanı gereklidir.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
-
+            [Required(ErrorMessage = "{0} alanı gereklidir.")]
+            [Display(Name = "Ad")]
             public string Name { get; set; }
+            [Required(ErrorMessage = "{0} alanı gereklidir.")]
+            [Display(Name = "Soyad")]
             public string Surname { get; set; }
+            [Required(ErrorMessage = "{0} alanı gereklidir.")]
+            [Display(Name = "Telefon Numarası")]
             public string PhoneNumber { get; set; }
+            [Display(Name = "TC Kimlik Numarası")]
+            [MinLength(11, ErrorMessage = "TC Kimlik No 11 karakter olmalıdır.")]
+            [MaxLength(11, ErrorMessage = "TC Kimlik No 11 karakter olmalıdır")]
             public long IdentityNumber { get; set; }
+            [Display(Name = "Aracı Var Mı?")]
             public bool HasCar { get; set; }
+            [Display(Name = "Araç Plakası")]
             public string CarPlate { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "{0} alanı gereklidir.")]
+            [StringLength(100, ErrorMessage = "{0} en az {2}, en fazla {1} karakter olmalıdır.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Şifre")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Şifreyi Onayla")]
+            [Compare("Password", ErrorMessage = "Girdiğiniz şifreler uyuşmuyor.")]
             public string ConfirmPassword { get; set; }
         }
 
