@@ -28,6 +28,8 @@ namespace Logo.Proje.Business.Concretes
         }
         public void AddApartment(Apartment apartment)
         {
+            apartment.CreatedAt = DateTime.Now;
+            apartment.CreatedBy = "SYSTEM"; //fix: get current user
             _repository.Add(apartment);
             _unitOfWork.Commit();
         }

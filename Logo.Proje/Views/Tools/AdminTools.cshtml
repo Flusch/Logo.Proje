@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Admin Tools";
+}
+
+<h1>Admin Tools</h1>
+
+<h4>Tools</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Apartments" onclick="window.location.href = '@Url.Action("Index", "Apartment")'" class="btn btn-primary"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Residents" onclick="window.location.href = '@Url.Action("Index", "Resident")'" class="btn btn-primary"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Bills" onclick="window.location.href = '@Url.Action("Index", "Bill")'" class="btn btn-primary"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Messages" onclick="window.location.href = '@Url.Action("Index", "Message")'" class="btn btn-primary"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Cards" onclick="window.location.href = '@Url.Action("Index", "Card")'" class="btn btn-primary"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Payments" onclick="window.location.href = '@Url.Action("Index", "Payment")'" class="btn btn-primary"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="User Role Manager" onclick="window.location.href = '@Url.Action("Index", "UserRoleManager")'" class="btn btn-primary"/>
+    </div>
+</div>

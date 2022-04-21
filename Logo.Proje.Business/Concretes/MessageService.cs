@@ -28,6 +28,8 @@ namespace Logo.Proje.Business.Concretes
         }
         public void AddMessage(Message message)
         {
+            message.CreatedAt = DateTime.Now;
+            message.CreatedBy = "SYSTEM"; //fix: get current user
             _repository.Add(message);
             _unitOfWork.Commit();
         }

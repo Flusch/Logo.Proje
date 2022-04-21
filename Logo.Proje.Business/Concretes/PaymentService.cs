@@ -19,7 +19,6 @@ namespace Logo.Proje.Business.Concretes
         public void AddPayment(Payment payment)
         {
             payment.CreatedAt = DateTime.Now;
-            payment.CreatedBy = "SYSTEM";
             _payments.InsertOne(payment);
         }
         public void UpdatePayment(Payment payment)

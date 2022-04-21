@@ -1,10 +1,12 @@
 ﻿using Logo.Proje.Business.Abstracts;
+using Logo.Proje.Domain.Entities;
 using Logo.Proje.Domain.MongoDbEntities;
 using Logo.Proje.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Threading.Tasks;
 
 namespace Logo.Proje.Controllers
@@ -55,19 +57,34 @@ namespace Logo.Proje.Controllers
         // POST: PayBill/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PayBill([Bind("Type,ApartmentId,Amount,BillDate,DueDate,IsPaid,PaymentDate,Id")] Payment payment)
+        public async Task<IActionResult> PayBill(int? id, [Bind("Type,ApartmentId,Amount,BillDate,DueDate,IsPaid,PaymentDate,Id")] Bill bill)
         {
             if (ModelState.IsValid)
             {
-                _paymentService.AddPayment(payment);
-                return RedirectToAction(nameof(Index));
+                System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+                var user = await _userManager.GetUserAsync(User);
+                _paymentService.AddPayment(new Payment
+                {
+                    CardId = -1,
+                    BillId = bill.Id,
+                    CreatedBy = user.Id,
+                    PaymentDate = DateTime.Now,
+                });
+                _billService.UpdateBill(new Bill
+                {
+                    Id = bill.Id,
+                    ApartmentId = bill.ApartmentId,
+                    IsPaid = true,
+                    PaymentDate = DateTime.Now,
+                    LastUpdatedBy = user.Id
+                });
+                return RedirectToAction(nameof(MyBills));
             }
             /*
-            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
-            var user = await _userManager.GetUserAsync(User);
+            
             ViewData["MyBills"] = new SelectList(_billService.GetMyBills(user.Id), "Id", "Amount"); //fix: find a way to show the 'residentName(email)' instead of id
             */
-            return View(payment);
+            return View(bill);
         }
         public async Task<IActionResult> MyMessages()
         {

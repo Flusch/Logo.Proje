@@ -55,8 +55,9 @@
         </dd>
     </dl>
     
-    <form asp-action="Pay">
+    <form asp-action="PayBill">
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ApartmentId" />
         <input type="submit" value="PayBill" class="btn btn-success" />
         <a asp-action="MyBills">Back to List</a>
     </form>

@@ -42,11 +42,11 @@ namespace Logo.Proje.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "{0} alanı gereklidir.")]
             [Display(Name = "Email / Kullanıcı Adı")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} alanı gereklidir.")]
             [DataType(DataType.Password)]
             [Display(Name = "Şifre")]
             public string Password { get; set; }

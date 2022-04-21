@@ -28,6 +28,8 @@ namespace Logo.Proje.Business.Concretes
         }
         public void AddBill(Bill bill)
         {
+            bill.CreatedAt = DateTime.Now;
+            bill.CreatedBy = "SYSTEM"; //fix: get current user
             _repository.Add(bill);
             _unitOfWork.Commit();
         }
@@ -43,8 +45,6 @@ namespace Logo.Proje.Business.Concretes
                 exist.DueDate = bill.DueDate;
                 exist.IsPaid = bill.IsPaid;
                 exist.PaymentDate = bill.PaymentDate;
-                //exist.Apartment = bill.Apartment;
-                exist.LastUpdatedBy = "SYSTEM"; //fix: get current user
                 exist.LastUpdatedAt = DateTime.Now;
                 _repository.Update(exist);
                 _unitOfWork.Commit();
